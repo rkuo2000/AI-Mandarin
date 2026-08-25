@@ -90,7 +90,7 @@
 ```
 一位印尼籍大學生的自我介紹：姓名、國籍、學校（正修科大）、興趣
 ```
-<a href=""><img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/66d57195-4873-4f0a-bf8f-463c28449e7f" /></a>
+<a href="https://youtu.be/JhGdRwRnmOM"><img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/66d57195-4873-4f0a-bf8f-463c28449e7f" /></a>
 
 #### Prompt : 基本問候與禮貌用語
 ```
