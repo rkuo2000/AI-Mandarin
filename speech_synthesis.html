@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>語音合成（zh-TW）</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      max-width: 640px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      color: #1f2937;
+      background: #f9fafb;
+    }
+    h1 { font-size: 1.4rem; margin-bottom: 0.4rem; }
+    .sub { color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem; }
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    label { display: block; font-weight: 600; margin: 1rem 0 0.4rem; font-size: 0.9rem; }
+    textarea {
+      width: 100%;
+      min-height: 110px;
+      padding: 0.6rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    select, input[type="range"] {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    #voices {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+    .val { font-variant-numeric: tabular-nums; font-weight: 400; }
+    .controls { display: flex; gap: 0.6rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    button {
+      padding: 0.6rem 1.1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      background: #2563eb;
+      color: #fff;
+      transition: background 0.15s;
+    }
+    button:hover { background: #1d4ed8; }
+    button.secondary { background: #e5e7eb; color: #1f2937; }
+    button.secondary:hover { background: #d1d5db; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .status { margin-top: 1rem; font-size: 0.9rem; color: #6b7280; min-height: 1.2em; }
+    .translated {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      color: #374151;
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+      min-height: 0;
+    }
+    .translated:empty { display: none; }
+    .translated .tag { font-weight: 600; margin-right: 0.4rem; }
+  </style>
+</head>
+<body>
+  <h1>Speech Synthesis（語音合成）</h1>
+  
+  <div class="card">
+    <label for="lang">Langugage</label>
+    <select id="lang">
+      <option value="zh-TW">中文（zh-TW）</option>
+      <option value="en">英文（English）</option>
+      <option value="id">印尼文（Bahasa Indonesia）</option>
+      <option value="vi">越南文（Tiếng Việt）</option>
+    </select>
+
+    <label for="text">Text</label>
+    <textarea id="text">你好，歡迎使用語音合成。</textarea>
+
+    <label for="voices">Voice（zh-TW，系統自動選擇）</label>
+    <input id="voices" type="text" readonly />
+
+    <label for="rate">Speed（速度）：<span class="val" id="rateVal">0.8</span></label>
+    <input type="range" id="rate" min="0.5" max="2" step="0.1" value="0.8" />
+
+    <label for="pitch">Pitch（音高）：<span class="val" id="pitchVal">1.0</span></label>
+    <input type="range" id="pitch" min="0" max="2" step="0.1" value="1" />
+
+    <label for="volume">Volume（音量）：<span class="val" id="volumeVal">1.0</span></label>
+    <input type="range" id="volume" min="0" max="1" step="0.1" value="1" />
+
+    <div class="controls">
+      <button id="speak">▶ Synthesize</button>
+      <button id="stop" class="secondary">⏹ Stop</button>
+    </div>
+
+    <div id="translated" class="translated"></div>
+    <div class="status" id="status"></div>
+  </div>
+
+  <script>
+    const langSelect = document.getElementById("lang");
+    const textEl = document.getElementById("text");
+    const voiceSelect = document.getElementById("voices");
+    const rateInput = document.getElementById("rate");
+    const pitchInput = document.getElementById("pitch");
+    const volumeInput = document.getElementById("volume");
+    const rateVal = document.getElementById("rateVal");
+    const pitchVal = document.getElementById("pitchVal");
+    const volumeVal = document.getElementById("volumeVal");
+    const statusEl = document.getElementById("status");
+    const translatedEl = document.getElementById("translated");
+
+    let zhVoices = [];
+
+    function setDefaultText() {
+      const samples = {
+        "zh-TW": "你好，歡迎使用語音合成。",
+        "en": "Hello, welcome to use the speech synthesis.",
+        "id": "Halo, Selamat datang di sintesis suara.",
+        "vi": "Xin chào, chào mừng bạn đến với tổng hợp giọng nói."
+      };
+      textEl.value = samples[langSelect.value] || samples["zh-TW"];
+      translatedEl.innerHTML = "";
+    }
+
+    function loadVoices() {
+      const all = window.speechSynthesis.getVoices();
+      // 只保留 zh-TW 聲音；若沒有 zh-TW 則退回任何 zh 系
+      zhVoices = all
+        .filter(v => v.lang.replace("_", "-").toLowerCase() === "zh-tw")
+        .sort((a, b) => a.name.localeCompare(b.name));
+      if (zhVoices.length === 0) {
+        zhVoices = all.filter(v => v.lang.toLowerCase().includes("zh"));
+      }
+      renderVoiceOptions();
+    }
+
+    function renderVoiceOptions() {
+      if (zhVoices.length === 0) {
+        voiceSelect.value = "（zh-TW voice not found，use system default）";
+        return;
+      }
+      const v = zhVoices[0];
+      voiceSelect.value = `${v.name} — ${v.lang}${v.localService ? " (Local)" : " (Cloud)"}`;
+    }
+
+    function bindRange(input, label) {
+      input.addEventListener("input", () => (label.textContent = Number(input.value).toFixed(1)));
+    }
+    bindRange(rateInput, rateVal);
+    bindRange(pitchInput, pitchVal);
+    bindRange(volumeInput, volumeVal);
+
+    // 使用 Google 免費翻譯端點，將文字翻譯為 zh-TW
+    async function translateToZhTW(text, sourceLang) {
+      const url =
+        "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" +
+        encodeURIComponent(sourceLang) +
+        "&tl=zh-TW&dt=t&q=" +
+        encodeURIComponent(text);
+
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Translation Abnormal (" + res.status + ")");
+      const data = await res.json();
+
+      // 回應結構：[[ [譯文片段, 原文片段, ...], ... ], ...]
+      if (Array.isArray(data) && Array.isArray(data[0])) {
+        return data[0].map(seg => (seg && seg[0]) || "").join("");
+      }
+      return "";
+    }
+
+    async function handleSpeak() {
+      const raw = textEl.value.trim();
+      if (!raw) {
+        statusEl.textContent = "Please key-in text。";
+        return;
+      }
+
+      const sourceLang = langSelect.value;
+      let textToSpeak = raw;
+      translatedEl.innerHTML = "";
+
+      const speakBtn = document.getElementById("speak");
+      speakBtn.disabled = true;
+
+      try {
+        if (sourceLang !== "zh-TW") {
+          statusEl.textContent = "Translating …";
+          const translated = await translateToZhTW(raw, sourceLang);
+          if (!translated) throw new Error("Not translated !");
+          textToSpeak = translated;
+          translatedEl.innerHTML =
+            '<span class="tag">Translation：</span>' +
+            translated.replace(/</g, "&lt;");
+          statusEl.textContent = "翻譯完成，開始朗讀…";
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        if (zhVoices[0]) utterance.voice = zhVoices[0];
+        utterance.lang = "zh-TW";
+        utterance.rate = Number(rateInput.value);
+        utterance.pitch = Number(pitchInput.value);
+        utterance.volume = Number(volumeInput.value);
+
+        utterance.onstart = () => (statusEl.textContent = "Playing(播放中)…");
+        utterance.onend = () => (statusEl.textContent = "Done(完成).");
+        utterance.onerror = (e) => (statusEl.textContent = "Error(錯誤)：" + e.error);
+
+        window.speechSynthesis.speak(utterance);
+      } catch (err) {
+        statusEl.textContent = "Errors(發生錯誤)：" + err.message;
+      } finally {
+        speakBtn.disabled = false;
+      }
+    }
+
+    document.getElementById("speak").addEventListener("click", handleSpeak);
+
+    document.getElementById("stop").addEventListener("click", () => {
+      window.speechSynthesis.cancel();
+      statusEl.textContent = "已停止。";
+    });
+
+    langSelect.addEventListener("change", setDefaultText);
+
+    setDefaultText();
+    loadVoices();
+    // 聲音清單可能在載入後才補齊
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  </script>
+</body>
+</html>

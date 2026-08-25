@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>即時語音轉文字</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-3xl p-4">
+  <h1 class="text-2xl font-bold mb-4 text-center">🎤 Speech Recongition (語音辨識)</h1>
+
+  <div class="bg-white shadow-xl rounded-2xl p-6">
+    <!-- 即時辨識 -->
+    <label class="text-sm text-gray-600">Real-Time Recognition (即時辨識)</label>
+    <textarea id="liveOutput" class="w-full h-28 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 resize-none mb-3" placeholder="即時語音辨識..."></textarea>
+
+    <!-- 累積結果 -->
+    <label class="text-sm text-gray-600">Text (累積文字)</label>
+    <textarea id="finalOutput" class="w-full h-40 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none" placeholder="所有辨識結果會累積在這裡..."></textarea>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4">
+      <button id="toggleBtn" class="bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg">Start SR</button>
+      <button id="clearBtn" class="bg-gray-500 hover:bg-gray-600 text-white py-2 rounded-lg">Clear Text</button>
+      <button id="saveBtn" class="bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg">Save Text</button>
+    </div>
+
+    <p class="text-sm text-gray-500 mt-3 text-center">支援 Chrome / Edge（Web Speech API）</p>
+  </div>
+</div>
+
+<script>
+  const liveOutput = document.getElementById('liveOutput');
+  const finalOutput = document.getElementById('finalOutput');
+  const toggleBtn = document.getElementById('toggleBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const saveBtn = document.getElementById('saveBtn');
+
+  let recognition;
+  let isRecording = false;
+
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+
+    recognition.lang = 'zh-TW';
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    recognition.onresult = (event) => {
+      let interim = '';
+      let finalText = '';
+
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        if (event.results[i].isFinal) {
+          finalText += event.results[i][0].transcript;
+        } else {
+          interim += event.results[i][0].transcript;
+        }
+      }
+
+      liveOutput.value = interim;
+
+      if (finalText) {
+        finalOutput.value += finalText + '\n';
+      }
+    };
+
+    recognition.onerror = (event) => {
+      alert('錯誤: ' + event.error);
+    };
+
+    recognition.onend = () => {
+      if (isRecording) {
+        recognition.start(); // 自動重啟避免中斷
+      }
+    };
+
+  } else {
+    alert('此瀏覽器不支援語音辨識');
+  }
+
+  toggleBtn.onclick = () => {
+    if (!recognition) return;
+
+    if (!isRecording) {
+      recognition.start();
+      isRecording = true;
+      toggleBtn.textContent = '停止辨識';
+      toggleBtn.classList.remove('bg-green-500','hover:bg-green-600');
+      toggleBtn.classList.add('bg-red-500','hover:bg-red-600');
+    } else {
+      isRecording = false;
+      recognition.stop();
+      toggleBtn.textContent = '開始辨識';
+      toggleBtn.classList.remove('bg-red-500','hover:bg-red-600');
+      toggleBtn.classList.add('bg-green-500','hover:bg-green-600');
+    }
+  };
+
+  clearBtn.onclick = () => {
+    finalOutput.value = '';
+  };
+
+  saveBtn.onclick = () => {
+    const blob = new Blob([finalOutput.value], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'speech.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+</script>
+
+</body>
+</html>
