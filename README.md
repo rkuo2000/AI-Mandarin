@@ -84,9 +84,17 @@
 ### [Grok Imagine](https://grok.com)
 左側點選 **Imagine** <br>
 輸入以下提示詞後，點**影片**，再按送出鍵。<br>
+
+#### Prompt : 自我介紹
 ```
 一位印尼籍大學生的自我介紹：姓名、國籍、學校（正修科大）、興趣
 ```
 <img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/66d57195-4873-4f0a-bf8f-463c28449e7f" />
+
+#### Prompt : 基本問候與禮貌用語
+```
+一位印尼籍正修科大(Cheng Shiu University) 的大一新生說華語的基本問候與禮貌用語
+```
+<img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/ade9b785-420d-4d74-b1f0-35c4e43dde1a" />
 
 
