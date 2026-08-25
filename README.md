@@ -95,6 +95,4 @@
 ```
 一位印尼籍正修科大(Cheng Shiu University) 的大一新生說華語的基本問候與禮貌用語
 ```
-<img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/ade9b785-420d-4d74-b1f0-35c4e43dde1a" />
-
-
+<a href="https://grok.com/imagine/post/1d9c2f60-6bf3-4f45-a85f-916f730da72c"><img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/ade9b785-420d-4d74-b1f0-35c4e43dde1a" /></a>
