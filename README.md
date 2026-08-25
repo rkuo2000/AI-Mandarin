@@ -55,7 +55,7 @@
 ```
 @創作圖像 一位外籍印尼大學生在麻古茶坊飲料店跟店員買波霸奶茶
 ```
-![]()
+![](https://github.com/rkuo2000/AI-Mandarin/blob/main/bubble_tea_GPT.png?raw=true)
 
 ---
 #### [Nano Banana](https://aistudio.google.com/prompts/new_chat)<br>
@@ -63,7 +63,7 @@
 ```
 一位外籍印尼大學生在麻古茶坊飲料店跟店員買波霸奶茶
 ```
-![]()
+![](https://github.com/rkuo2000/AI-Mandarin/blob/main/bubble_tea_Gemini.png?raw=true)
 
 ---
 #### [Grok Imagine](https://grok.com)<br>
@@ -72,7 +72,7 @@
 ```
 一位外籍印尼大學生在麻古茶坊飲料店跟店員買波霸奶茶
 ```
-![]()
+![](https://github.com/rkuo2000/AI-Mandarin/blob/main/bubble_tea_Grok.jpg?raw=true)
 
 ---
 ## 4. 語音生成 (Text-to-Speech)
