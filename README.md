@@ -1,4 +1,4 @@
-# 華語教師AI教學增能工作坊
+# 華語教師 AI 教學增能工作坊
 **[全球華文網](https://www.huayuworld.org/NewDetail/Index/1325)** <br>
 * [Gamma 簡報工具](https://www.huayuworld.org/NewDetail/Index/1200)
 * [【線上教學分享會】AI ✕華語老師：AI高效備課分享](https://youtu.be/XGPuEvxLNIA)
