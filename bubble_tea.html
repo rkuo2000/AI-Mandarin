@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>華語情境課程｜飲料店買波霸奶茶</title>
+<style>
+:root {
+  --red:#d9362b; --dark:#242424; --cream:#fffaf3; --gold:#e9b949;
+  --blue:#315b9a; --green:#3f8064; --line:#e8e1d8; --shadow:0 12px 35px rgba(55,40,25,.12);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:#f5f1eb;color:var(--dark);line-height:1.6}
+header{background:linear-gradient(135deg,#9f211c,#d9362b);color:white;padding:28px 5vw;box-shadow:0 5px 18px rgba(0,0,0,.12)}
+.header-inner{max-width:1500px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:20px}
+h1{margin:0;font-size:clamp(25px,3vw,42px);letter-spacing:.04em}
+.subtitle{opacity:.9;margin-top:4px}
+.badge{background:#fff;color:var(--red);padding:8px 14px;border-radius:99px;font-weight:800;white-space:nowrap}
+main{max-width:1500px;margin:28px auto;padding:0 20px}
+.lesson-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.pill{background:white;border:1px solid var(--line);padding:8px 14px;border-radius:99px;font-weight:700}
+.grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(340px,.75fr);gap:22px;align-items:start}
+.scene-card,.panel,.section{background:white;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.scene-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.scene-head h2{margin:0;font-size:21px}
+.scene-wrap{position:relative;background:#ddd}
+.scene-wrap img{display:block;width:100%;height:auto}
+.bubble{position:absolute;max-width:25%;padding:12px 16px;background:rgba(255,255,255,.96);border:3px solid #333;border-radius:24px;box-shadow:0 7px 18px rgba(0,0,0,.18);font-weight:700}
+.bubble::after{content:"";position:absolute;bottom:-15px;width:25px;height:25px;background:white;border-right:3px solid #333;border-bottom:3px solid #333;transform:rotate(45deg)}
+.bubble.student{left:36%;top:23%}
+.bubble.student::after{left:22px}
+.bubble.clerk{right:3%;top:24%}
+.bubble.clerk::after{right:28px}
+.bubble .mini{display:block;font-size:12px;font-weight:500;color:#555;margin-top:3px}
+.transcript{padding:18px}
+.transcript h2{margin:0 0 12px}
+.line-card{display:flex;gap:10px;padding:13px 12px;margin:9px 0;border-radius:15px;border-left:5px solid var(--blue);background:#f4f7fc;position:relative}
+.line-card.clerk{border-left-color:var(--red);background:#fff5f3}
+.num{width:26px;height:26px;border-radius:50%;background:#333;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800;flex:0 0 auto}
+.speaker{font-size:12px;font-weight:900;color:#555}
+.zh{font-size:18px;font-weight:850}
+.pinyin{font-size:13px;color:#6d6d6d}
+.indonesian{font-size:12px;color:#4c7b65}
+.speak{margin-left:auto;border:0;background:white;border-radius:50%;width:35px;height:35px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.1);flex:0 0 auto}
+.speak:hover{transform:scale(1.05)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+button.tool{border:0;border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer;background:#292929;color:#fff}
+button.tool.alt{background:#eee;color:#333}
+.section{margin-top:22px;padding:24px}
+.section h2{margin-top:0}
+table{width:100%;border-collapse:collapse}
+th,td{padding:11px;border-bottom:1px solid var(--line);text-align:left}
+th{background:#faf5ec}
+.quiz{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.quiz-item{border:1px solid var(--line);border-radius:15px;padding:15px;background:#fffdf9}
+.quiz-item label{display:block;margin:7px 0;cursor:pointer}
+.result{margin-top:15px;padding:12px;border-radius:12px;background:#f2f6ff;font-weight:800;display:none}
+footer{text-align:center;color:#777;padding:35px 15px}
+
+.speech-settings{margin-top:14px;padding:14px;background:#faf7f1;border:1px solid var(--line);border-radius:15px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.speech-settings label{font-size:13px;font-weight:800;display:flex;align-items:center;gap:8px}
+.speech-settings select{min-width:0;flex:1;padding:7px;border:1px solid #ccc;border-radius:8px;background:white}
+.speech-settings input[type=range]{flex:1;min-width:80px}
+.speech-status{grid-column:1/-1;font-size:12px;color:#666}
+.practice-box{background:#fffaf3;border:1px solid var(--line);border-radius:18px;padding:18px}
+.target-sentence{font-size:21px;margin-bottom:14px}
+.practice-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.recognized{margin-top:15px;padding:14px;border-radius:12px;background:#f4f7fc;min-height:48px;font-size:18px}
+.match{margin-top:10px;padding:10px;border-radius:10px;font-weight:800;display:none}
+.line-card.active-speech{outline:3px solid var(--gold);transform:translateX(3px);transition:.15s}
+@media(max-width:620px){
+ .speech-settings{grid-template-columns:1fr}
+ .speech-settings label{flex-wrap:wrap}
+ .target-sentence{font-size:18px}
+}
+@media(max-width:950px){
+ .grid{grid-template-columns:1fr}
+ .bubble{font-size:12px;max-width:31%;padding:8px 10px}
+ .bubble .mini{font-size:9px}
+}
+@media(max-width:620px){
+ main{padding:0 10px;margin-top:15px}
+ .header-inner{align-items:flex-start;flex-direction:column}
+ .badge{font-size:12px}
+ .bubble{max-width:38%;font-size:10px;border-width:2px;border-radius:14px}
+ .bubble.student{left:35%;top:22%}
+ .bubble.clerk{right:2%;top:22%}
+ .quiz{grid-template-columns:1fr}
+ .scene-head{padding:13px 15px}
+ .zh{font-size:16px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div>
+      <h1>🥤 華語情境課程：在飲料店買波霸奶茶</h1>
+      <div class="subtitle">情境：外籍學生第一次到台灣飲料店點飲料</div>
+    </div>
+    <div class="badge">HSK／初級生活華語</div>
+  </div>
+</header>
+
+<main>
+  <div class="lesson-bar">
+    <span class="pill">🎯 學習目標：點飲料</span>
+    <span class="pill">🗣️ 練習：大小・甜度・冰塊</span>
+    <span class="pill">🇨🇳 中文＋拼音</span>
+    <span class="pill">🇮🇩 印尼語輔助</span>
+  </div>
+
+  <div class="grid">
+    <section class="scene-card">
+      <div class="scene-head">
+        <h2>📷 情境對話</h2>
+        <button class="tool alt" onclick="toggleBubbles()">顯示／隱藏對話框</button>
+      </div>
+      <div class="scene-wrap" id="scene">
+        <img src="https://github.com/rkuo2000/AI-Mandarin/blob/main/bubble_tea_GPT.png?raw=true">
+        <div class="bubble student">
+          我要買一杯<br>波霸奶茶。
+          <span class="mini">Wǒ yào mǎi yì bēi bōbà nǎichá.</span>
+        </div>
+        <div class="bubble clerk">
+          好的，請問要什麼大小、<br>甜度和冰塊呢？
+          <span class="mini">Hǎo de, qǐngwèn yào shénme dàxiǎo...</span>
+        </div>
+      </div>
+      <div class="transcript">
+        <h2>💬 完整對話</h2>
+        <div id="lines">
+      <article class="line-card student" data-speaker="student">
+        <div class="num">1</div>
+        <div class="line-body">
+          <div class="speaker">外籍學生</div>
+          <div class="zh">我要買一杯波霸奶茶。</div>
+          <div class="pinyin">Wǒ yào mǎi yì bēi bōbà nǎichá.</div>
+          <div class="indonesian">Saya ingin beli segelas bubble milk tea.</div>
+        </div>
+        <button class="speak" onclick="speakLine(0)" title="播放中文">🔊</button>
+      </article>
+    
+      <article class="line-card clerk" data-speaker="clerk">
+        <div class="num">2</div>
+        <div class="line-body">
+          <div class="speaker">店員</div>
+          <div class="zh">好的，請問要什麼大小、甜度和冰塊呢？</div>
+          <div class="pinyin">Hǎo de, qǐngwèn yào shénme dàxiǎo, tiándù hé bīngkuài ne?</div>
+          <div class="indonesian">Baik, mau ukuran, tingkat gula, dan es berapa?</div>
+        </div>
+        <button class="speak" onclick="speakLine(1)" title="播放中文">🔊</button>
+      </article>
+    
+      <article class="line-card student" data-speaker="student">
+        <div class="num">3</div>
+        <div class="line-body">
+          <div class="speaker">外籍學生</div>
+          <div class="zh">我要中杯，半糖，少冰。</div>
+          <div class="pinyin">Wǒ yào zhōng bēi, bàn táng, shǎo bīng.</div>
+          <div class="indonesian">Saya mau ukuran sedang, setengah gula, sedikit es.</div>
+        </div>
+        <button class="speak" onclick="speakLine(2)" title="播放中文">🔊</button>
+      </article>
+    
+      <article class="line-card clerk" data-speaker="clerk">
+        <div class="num">4</div>
+        <div class="line-body">
+          <div class="speaker">店員</div>
+          <div class="zh">好的，一共六十元。請問還需要其他的嗎？</div>
+          <div class="pinyin">Hǎo de, yígòng liùshí yuán. Qǐngwèn hái xūyào qítā de ma?</div>
+          <div class="indonesian">Baik, totalnya 60 dolar Taiwan. Perlu yang lain?</div>
+        </div>
+        <button class="speak" onclick="speakLine(3)" title="播放中文">🔊</button>
+      </article>
+    
+      <article class="line-card student" data-speaker="student">
+        <div class="num">5</div>
+        <div class="line-body">
+          <div class="speaker">外籍學生</div>
+          <div class="zh">不用了，謝謝。</div>
+          <div class="pinyin">Bú yòng le, xièxie.</div>
+          <div class="indonesian">Tidak perlu, terima kasih.</div>
+        </div>
+        <button class="speak" onclick="speakLine(4)" title="播放中文">🔊</button>
+      </article>
+    
+      <article class="line-card clerk" data-speaker="clerk">
+        <div class="num">6</div>
+        <div class="line-body">
+          <div class="speaker">店員</div>
+          <div class="zh">不客氣，請稍等一下。</div>
+          <div class="pinyin">Bú kèqì, qǐng shāo děng yíxià.</div>
+          <div class="indonesian">Sama-sama, silakan tunggu sebentar.</div>
+        </div>
+        <button class="speak" onclick="speakLine(5)" title="播放中文">🔊</button>
+      </article>
+    </div>
+        <div class="tools">
+          <button class="tool" onclick="playAll()">▶️ Web Speech 播放全部</button>
+          <button class="tool alt" onclick="stopSpeech()">⏹ 停止</button>
+        </div>
+        <div class="speech-settings">
+          <label>中文語音：
+            <select id="voiceSelect"></select>
+          </label>
+          <label>語速：
+            <input id="rate" type="range" min="0.55" max="1.15" step="0.05" value="0.82">
+            <span id="rateValue">0.82</span>
+          </label>
+          <label>音調：
+            <input id="pitch" type="range" min="0.5" max="1.5" step="0.05" value="1">
+            <span id="pitchValue">1.00</span>
+          </label>
+          <div id="speechStatus" class="speech-status">Web Speech API：準備中…</div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel" style="padding:20px">
+      <h2 style="margin-top:0">📚 本課重點句型</h2>
+      <div class="line-card student">
+        <div class="line-body">
+          <div class="speaker">句型 1｜我要＋飲料</div>
+          <div class="zh">我要買一杯波霸奶茶。</div>
+          <div class="pinyin">Wǒ yào mǎi yì bēi bōbà nǎichá.</div>
+          <div class="indonesian">Saya ingin membeli satu gelas bubble milk tea.</div>
+        </div>
+      </div>
+      <div class="line-card clerk">
+        <div class="line-body">
+          <div class="speaker">句型 2｜請問要＋選項</div>
+          <div class="zh">請問要什麼大小、甜度和冰塊呢？</div>
+          <div class="pinyin">Qǐngwèn yào shénme dàxiǎo, tiándù hé bīngkuài ne?</div>
+          <div class="indonesian">Mau ukuran, tingkat gula, dan es berapa?</div>
+        </div>
+      </div>
+      <div class="line-card student">
+        <div class="line-body">
+          <div class="speaker">回答方式</div>
+          <div class="zh">中杯、半糖、少冰。</div>
+          <div class="pinyin">Zhōng bēi, bàn táng, shǎo bīng.</div>
+          <div class="indonesian">Ukuran sedang, setengah gula, sedikit es.</div>
+        </div>
+      </div>
+
+      <h2>🔤 關鍵詞彙</h2>
+      <div style="overflow:auto">
+      <table>
+        <thead><tr><th>中文</th><th>拼音</th><th>印尼語</th></tr></thead>
+        <tbody><tr><td><strong>波霸奶茶</strong></td><td>bōbà nǎichá</td><td>bubble milk tea</td></tr><tr><td><strong>一杯</strong></td><td>yì bēi</td><td>satu gelas</td></tr><tr><td><strong>中杯</strong></td><td>zhōng bēi</td><td>ukuran sedang</td></tr><tr><td><strong>半糖</strong></td><td>bàn táng</td><td>setengah gula</td></tr><tr><td><strong>少冰</strong></td><td>shǎo bīng</td><td>sedikit es</td></tr><tr><td><strong>一共</strong></td><td>yígòng</td><td>total</td></tr><tr><td><strong>不用了</strong></td><td>bú yòng le</td><td>tidak perlu lagi</td></tr><tr><td><strong>稍等一下</strong></td><td>shāo děng yíxià</td><td>tunggu sebentar</td></tr></tbody>
+      </table>
+      </div>
+    </aside>
+  </div>
+
+  <section class="section">
+    <h2>🎙️ Web Speech 口說練習</h2>
+    <p>按下「開始說話」，用中文說出指定句子。瀏覽器會透過 Web Speech API 嘗試辨識你的中文發音。</p>
+    <div class="practice-box">
+      <div class="target-sentence">請說：<strong>我要買一杯波霸奶茶。</strong></div>
+      <div class="practice-buttons">
+        <button class="tool" id="recognizeBtn" onclick="toggleRecognition()">🎙️ 開始說話</button>
+        <button class="tool alt" onclick="setPracticeSentence('我要買一杯波霸奶茶。')">學生句</button>
+        <button class="tool alt" onclick="setPracticeSentence('好的，請問要什麼大小、甜度和冰塊呢？')">店員句</button>
+      </div>
+      <div class="recognized" id="recognizedText">辨識結果會顯示在這裡。</div>
+      <div class="match" id="matchResult"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>✏️ 小測驗：你會點飲料了嗎？</h2>
+    <div class="quiz">
+      <div class="quiz-item">
+        <strong>1. 「半糖」是什麼意思？</strong>
+        <label><input type="radio" name="q1" value="0"> 全糖</label>
+        <label><input type="radio" name="q1" value="1"> 一半的糖</label>
+        <label><input type="radio" name="q1" value="0"> 無糖</label>
+      </div>
+      <div class="quiz-item">
+        <strong>2. 「少冰」是什麼意思？</strong>
+        <label><input type="radio" name="q2" value="1"> 少一點冰</label>
+        <label><input type="radio" name="q2" value="0"> 不要冰</label>
+        <label><input type="radio" name="q2" value="0"> 多一點冰</label>
+      </div>
+      <div class="quiz-item">
+        <strong>3. 想買一杯奶茶，可以說：</strong>
+        <label><input type="radio" name="q3" value="0"> 我吃一杯奶茶。</label>
+        <label><input type="radio" name="q3" value="1"> 我要買一杯奶茶。</label>
+        <label><input type="radio" name="q3" value="0"> 我看一杯奶茶。</label>
+      </div>
+      <div class="quiz-item">
+        <strong>4. 店員問「還需要其他的嗎？」可以回答：</strong>
+        <label><input type="radio" name="q4" value="1"> 不用了，謝謝。</label>
+        <label><input type="radio" name="q4" value="0"> 中杯。</label>
+        <label><input type="radio" name="q4" value="0"> 波霸奶茶。</label>
+      </div>
+    </div>
+    <button class="tool" style="margin-top:16px" onclick="checkQuiz()">檢查答案</button>
+    <div class="result" id="result"></div>
+  </section>
+</main>
+
+<footer>華語生活情境教學｜飲料店點餐單元</footer>
+
+<script>
+const dialogues = [
+  {
+    speaker: "student",
+    name: "外籍學生",
+    zh: "我要買一杯波霸奶茶。",
+    pinyin: "Wǒ yào mǎi yì bēi bōbà nǎichá.",
+    id: "Saya ingin beli segelas bubble milk tea."
+  },
+  {
+    speaker: "clerk",
+    name: "店員",
+    zh: "好的，請問要什麼大小、甜度和冰塊呢？",
+    pinyin: "Hǎo de, qǐngwèn yào shénme dàxiǎo, tiándù hé bīngkuài ne?",
+    id: "Baik, mau ukuran, tingkat gula, dan es berapa?"
+  },
+  {
+    speaker: "student",
+    name: "外籍學生",
+    zh: "我要中杯，半糖，少冰。",
+    pinyin: "Wǒ yào zhōng bēi, bàn táng, shǎo bīng.",
+    id: "Saya mau ukuran sedang, setengah gula, sedikit es."
+  },
+  {
+    speaker: "clerk",
+    name: "店員",
+    zh: "好的，一共六十元。請問還需要其他的嗎？",
+    pinyin: "Hǎo de, yígòng liùshí yuán. Qǐngwèn hái xūyào qítā de ma?",
+    id: "Baik, totalnya 60 dolar Taiwan. Perlu yang lain?"
+  },
+  {
+    speaker: "student",
+    name: "外籍學生",
+    zh: "不用了，謝謝。",
+    pinyin: "Bú yòng le, xièxie.",
+    id: "Tidak perlu, terima kasih."
+  },
+  {
+    speaker: "clerk",
+    name: "店員",
+    zh: "不客氣，請稍等一下。",
+    pinyin: "Bú kèqì, qǐng shāo děng yíxià.",
+    id: "Sama-sama, silakan tunggu sebentar."
+  }
+];
+
+const synth = window.speechSynthesis;
+let voices = [];
+let playIndex = 0;
+let recognition = null;
+let recognizing = false;
+let practiceSentence = "我要買一杯波霸奶茶。";
+
+function loadVoices() {
+  if (!synth) return;
+  voices = synth.getVoices();
+
+  const select = document.getElementById("voiceSelect");
+  if (!select) return;
+
+  const old = select.value;
+  select.innerHTML = "";
+
+  // 優先列出 zh-TW / zh-HK / zh-CN 等中文聲音。
+  const chinese = voices.filter(v => /^zh/i.test(v.lang));
+  const ordered = [...chinese, ...voices.filter(v => !/^zh/i.test(v.lang))];
+
+  ordered.forEach((voice, index) => {
+    const option = document.createElement("option");
+    option.value = voices.indexOf(voice);
+    option.textContent = `${voice.name} (${voice.lang})${voice.default ? " — 預設" : ""}`;
+    select.appendChild(option);
+  });
+
+  const preferred = chinese.find(v => /^zh-TW/i.test(v.lang))
+                 || chinese.find(v => /^zh-HK/i.test(v.lang))
+                 || chinese.find(v => /^zh/i.test(v.lang));
+
+  if (preferred) {
+    select.value = String(voices.indexOf(preferred));
+  } else if (old) {
+    select.value = old;
+  }
+
+  updateSpeechStatus();
+}
+
+function updateSpeechStatus(message) {
+  const el = document.getElementById("speechStatus");
+  if (!el) return;
+  if (message) {
+    el.textContent = message;
+    return;
+  }
+  if (!("speechSynthesis" in window)) {
+    el.textContent = "此瀏覽器不支援 Web Speech 語音合成。";
+  } else {
+    const count = voices.filter(v => /^zh/i.test(v.lang)).length;
+    el.textContent = count
+      ? `Web Speech API：已載入 ${count} 個中文語音`
+      : "Web Speech API：找不到中文語音，將使用瀏覽器預設語音。";
+  }
+}
+
+function getSelectedVoice() {
+  const select = document.getElementById("voiceSelect");
+  if (!select || !voices.length) return null;
+  const index = Number(select.value);
+  return voices[index] || null;
+}
+
+function speakText(text, index = -1, onEnd = null) {
+  if (!("speechSynthesis" in window)) {
+    alert("此瀏覽器不支援 Web Speech API 的 SpeechSynthesis。");
+    return;
+  }
+
+  synth.cancel();
+
+  document.querySelectorAll(".line-card").forEach(el => el.classList.remove("active-speech"));
+  if (index >= 0) {
+    const card = document.querySelectorAll("#lines .line-card")[index];
+    if (card) card.classList.add("active-speech");
+  }
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "zh-TW";
+
+  const voice = getSelectedVoice();
+  if (voice) utterance.voice = voice;
+
+  utterance.rate = Number(document.getElementById("rate")?.value || 0.82);
+  utterance.pitch = Number(document.getElementById("pitch")?.value || 1);
+  utterance.volume = 1;
+
+  utterance.onstart = () => updateSpeechStatus(`🔊 正在播放：${text}`);
+  utterance.onend = () => {
+    document.querySelectorAll(".line-card").forEach(el => el.classList.remove("active-speech"));
+    updateSpeechStatus("Web Speech API：播放完成");
+    if (onEnd) onEnd();
+  };
+  utterance.onerror = (event) => {
+    document.querySelectorAll(".line-card").forEach(el => el.classList.remove("active-speech"));
+    updateSpeechStatus(`語音播放錯誤：${event.error || "unknown"}`);
+  };
+
+  synth.speak(utterance);
+}
+
+function speakLine(index) {
+  if (!dialogues[index]) return;
+  speakText(dialogues[index].zh, index);
+}
+
+function playAll() {
+  if (!("speechSynthesis" in window)) return;
+  synth.cancel();
+  playIndex = 0;
+
+  function next() {
+    if (playIndex >= dialogues.length) {
+      updateSpeechStatus("Web Speech API：全部對話播放完成");
+      return;
+    }
+    const i = playIndex++;
+    const utterance = new SpeechSynthesisUtterance(dialogues[i].zh);
+    utterance.lang = "zh-TW";
+
+    const voice = getSelectedVoice();
+    if (voice) utterance.voice = voice;
+
+    utterance.rate = Number(document.getElementById("rate")?.value || 0.82);
+    utterance.pitch = Number(document.getElementById("pitch")?.value || 1);
+    utterance.volume = 1;
+
+    document.querySelectorAll(".line-card").forEach(el => el.classList.remove("active-speech"));
+    const card = document.querySelectorAll("#lines .line-card")[i];
+    if (card) card.classList.add("active-speech");
+
+    utterance.onstart = () => updateSpeechStatus(`🔊 ${i + 1}/${dialogues.length}：${dialogues[i].name}`);
+    utterance.onend = () => setTimeout(next, 350);
+    utterance.onerror = () => setTimeout(next, 350);
+    synth.speak(utterance);
+  }
+  next();
+}
+
+function stopSpeech() {
+  if ("speechSynthesis" in window) synth.cancel();
+  document.querySelectorAll(".line-card").forEach(el => el.classList.remove("active-speech"));
+  updateSpeechStatus("Web Speech API：已停止");
+}
+
+function toggleBubbles() {
+  document.querySelectorAll(".bubble").forEach(b => {
+    b.style.display = b.style.display === "none" ? "block" : "none";
+  });
+}
+
+function setPracticeSentence(sentence) {
+  practiceSentence = sentence;
+  document.querySelector(".target-sentence").innerHTML =
+    `請說：<strong>${sentence}</strong>`;
+  document.getElementById("recognizedText").textContent = "辨識結果會顯示在這裡。";
+  document.getElementById("matchResult").style.display = "none";
+}
+
+function normalizeChinese(s) {
+  return s.replace(/[，。！？、,.!?；;：:\s]/g, "");
+}
+
+function compareSpeech(result) {
+  const target = normalizeChinese(practiceSentence);
+  const heard = normalizeChinese(result);
+  const box = document.getElementById("matchResult");
+  box.style.display = "block";
+
+  if (heard === target) {
+    box.textContent = "✅ 很好！辨識結果與目標句完全相同。";
+  } else if (heard && (heard.includes(target) || target.includes(heard))) {
+    box.textContent = "👍 很接近！再練習一次會更自然。";
+  } else {
+    box.textContent = `💡 再試一次。目標句：${practiceSentence}`;
+  }
+}
+
+function initRecognition() {
+  const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!Recognition) return null;
+
+  const r = new Recognition();
+  r.lang = "zh-TW";
+  r.continuous = false;
+  r.interimResults = true;
+  r.maxAlternatives = 1;
+
+  r.onstart = () => {
+    recognizing = true;
+    document.getElementById("recognizeBtn").textContent = "⏹️ 停止說話";
+    updateSpeechStatus("🎙️ 正在聆聽中文…");
+  };
+
+  r.onresult = (event) => {
+    let finalText = "";
+    let interim = "";
+
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const text = event.results[i][0].transcript;
+      if (event.results[i].isFinal) finalText += text;
+      else interim += text;
+    }
+
+    document.getElementById("recognizedText").textContent =
+      finalText || `正在辨識：${interim}`;
+
+    if (finalText) compareSpeech(finalText);
+  };
+
+  r.onerror = (event) => {
+    document.getElementById("recognizedText").textContent =
+      `語音辨識錯誤：${event.error}`;
+    updateSpeechStatus(`語音辨識：${event.error}`);
+  };
+
+  r.onend = () => {
+    recognizing = false;
+    document.getElementById("recognizeBtn").textContent = "🎙️ 開始說話";
+  };
+
+  return r;
+}
+
+function toggleRecognition() {
+  const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!Recognition) {
+    alert("此瀏覽器沒有提供 SpeechRecognition / webkitSpeechRecognition。可使用支援語音辨識的瀏覽器測試。");
+    return;
+  }
+
+  if (!recognition) recognition = initRecognition();
+
+  if (recognizing) {
+    recognition.stop();
+  } else {
+    document.getElementById("recognizedText").textContent = "正在準備聆聽…";
+    document.getElementById("matchResult").style.display = "none";
+    recognition.start();
+  }
+}
+
+function checkQuiz() {
+  let score = 0;
+  for (let i = 1; i <= 4; i++) {
+    const checked = document.querySelector(`input[name="q${i}"]:checked`);
+    if (checked && checked.value === "1") score++;
+  }
+  const r = document.getElementById("result");
+  r.style.display = "block";
+  r.textContent = `你答對了 ${score} / 4 題！` +
+    (score === 4 ? " 🎉 太棒了！你已經會在飲料店點餐了。" : " 再複習一下右側的關鍵詞彙吧！");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadVoices();
+
+  if ("onvoiceschanged" in synth) {
+    synth.addEventListener("voiceschanged", loadVoices);
+  }
+
+  document.getElementById("rate")?.addEventListener("input", e => {
+    document.getElementById("rateValue").textContent = Number(e.target.value).toFixed(2);
+  });
+
+  document.getElementById("pitch")?.addEventListener("input", e => {
+    document.getElementById("pitchValue").textContent = Number(e.target.value).toFixed(2);
+  });
+
+  if (!("speechSynthesis" in window)) {
+    updateSpeechStatus("此瀏覽器不支援 SpeechSynthesis。");
+  }
+});
+</script>
+</body>
+</html>
