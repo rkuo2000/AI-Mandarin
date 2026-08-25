@@ -89,10 +89,17 @@
 ```
 一位印尼籍大學生的自我介紹：姓名、國籍、學校（正修科大）、興趣
 ```
-<img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/66d57195-4873-4f0a-bf8f-463c28449e7f" />
+<a href=""><img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/66d57195-4873-4f0a-bf8f-463c28449e7f" /></a>
 
 #### Prompt : 基本問候與禮貌用語
 ```
 一位印尼籍正修科大(Cheng Shiu University) 的大一新生說華語的基本問候與禮貌用語
 ```
-<a href="https://grok.com/imagine/post/1d9c2f60-6bf3-4f45-a85f-916f730da72c"><img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/ade9b785-420d-4d74-b1f0-35c4e43dde1a" /></a>
+<a href="https://youtu.be/TfF6DaU2Qb8"><img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/ade9b785-420d-4d74-b1f0-35c4e43dde1a" /></a>
+
+#### Prompt : 去飲料店購買波霸奶茶
+```
+一位外籍印尼大學生在麻古茶坊飲料店跟店員買波霸奶茶
+```
+<a href="https://youtu.be/tCXbyHaDpD4"><img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/6562efb4-8fa9-496c-b396-a796fa463fc5" /></a>
+
