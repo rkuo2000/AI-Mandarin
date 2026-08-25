@@ -11,6 +11,9 @@
 ---
 ## 2. 文字生成 (Text Generation)
 
+### 提示詞的結構(Prompt Structure)
+![](https://github.com/rkuo2000/AI-Mandarin/blob/main/Prompt_Structure.png?raw=true)
+
 ### 提示詞 (Prompt)
 ```
 外籍學生需要的華語教學
