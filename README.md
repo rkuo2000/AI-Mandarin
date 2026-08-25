@@ -84,4 +84,10 @@
 一位印尼籍大學生的自我介紹：姓名、國籍、學校（正修科大）、興趣
 ```
 <img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/66d57195-4873-4f0a-bf8f-463c28449e7f" />
+<iframe width="640" height="360"
+  src="https://github.com/rkuo2000/AI-Mandarin/blob/main/self_intro_Grok.mp4?raw=true"
+  frameborder="0"
+  allow="autoplay; fullscreen; picture-in-picture"
+  allowfullscreen>
+</iframe>
 
