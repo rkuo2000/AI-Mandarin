@@ -134,4 +134,4 @@
 寫出一個華語教學網頁，情境內容為外籍學生去飲料店買波霸奶茶，以上傳之圖片疊加上右邊為店員的對話，左邊為學生的對話。圖片右側並附上所有對話內容。使用WebSpeech API
 ```
 
-#### [華語教學_飲料店買波霸奶茶.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/bubble_tea.html)
+#### [華語教學_飲料店買波霸奶茶.html](https://rkuo2025.github.io/app-bubble_tea)
