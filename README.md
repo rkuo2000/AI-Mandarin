@@ -49,5 +49,30 @@
 ---
 ## 3. 圖片生成 (Image Generation)
 
+### 飲料店買波霸奶茶
+
+#### [ChatGTP](https://chatgpt.com/)<br>
+```
+@創作圖像 一位外籍印尼大學生在麻古茶坊飲料店跟店員買波霸奶茶
+```
+![]()
+
+---
+#### [Nano Banana](https://aistudio.google.com/prompts/new_chat)<br>
+右側選 **模型**：種類＝影像(Images), 可選 Nano Banana Lite 2<br>
+```
+一位外籍印尼大學生在麻古茶坊飲料店跟店員買波霸奶茶
+```
+![]()
+
+---
+#### [Grok Imagine](https://grok.com)<br>
+左側點選 **Imagine** <br>
+輸入以下提示詞後，點圖片，再按送出鍵。
+```
+一位外籍印尼大學生在麻古茶坊飲料店跟店員買波霸奶茶
+```
+![]()
+
 ---
 ## 4. 語音生成 (Text-to-Speech)
