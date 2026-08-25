@@ -51,14 +51,14 @@
 
 ### 飲料店買波霸奶茶
 
-#### [ChatGTP](https://chatgpt.com/)<br>
+#### [ChatGTP](https://chatgpt.com/)
 ```
 @創作圖像 一位外籍印尼大學生在麻古茶坊飲料店跟店員買波霸奶茶
 ```
 ![](https://github.com/rkuo2000/AI-Mandarin/blob/main/bubble_tea_GPT.png?raw=true)
 
 ---
-#### [Nano Banana](https://aistudio.google.com/prompts/new_chat)<br>
+#### [Nano Banana](https://aistudio.google.com/prompts/new_chat)
 右側選 **模型**：種類＝影像(Images), 可選 Nano Banana Lite 2<br>
 ```
 一位外籍印尼大學生在麻古茶坊飲料店跟店員買波霸奶茶
@@ -66,13 +66,22 @@
 ![](https://github.com/rkuo2000/AI-Mandarin/blob/main/bubble_tea_Gemini.png?raw=true)
 
 ---
-#### [Grok Imagine](https://grok.com)<br>
+#### [Grok Imagine](https://grok.com)
 左側點選 **Imagine** <br>
-輸入以下提示詞後，點圖片，再按送出鍵。
+輸入以下提示詞後，點**圖片**，再按送出鍵。<br>
 ```
 一位外籍印尼大學生在麻古茶坊飲料店跟店員買波霸奶茶
 ```
 ![](https://github.com/rkuo2000/AI-Mandarin/blob/main/bubble_tea_Grok.jpg?raw=true)
 
 ---
-## 4. 語音生成 (Text-to-Speech)
+## 4. 影片生成 (Video Generation)
+
+### [Grok Imagine](https://grok.com)
+左側點選 **Imagine** <br>
+輸入以下提示詞後，點**影片**，再按送出鍵。<br>
+```
+一位印尼籍大學生的自我介紹：姓名、國籍、學校（正修科大）、興趣
+```
+<img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/66d57195-4873-4f0a-bf8f-463c28449e7f" />
+
