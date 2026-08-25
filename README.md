@@ -1,6 +1,6 @@
 # 華語教師AI教學增能工作坊
 
-## 1. [外籍學生的華語教學](https://github.com/rkuo2000/AI-Mandarin/blob/main/Mandarin_GPT.md)
+## 1. AI 工具介紹
 
 ### [ChatGPT](https://chatgpt.com/)
 
