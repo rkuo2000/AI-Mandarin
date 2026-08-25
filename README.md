@@ -107,13 +107,19 @@
 ---
 ### 5. 語音合成 & 語音辨識
 
-#### 語音合成 (Text-To-Speech)
+#### 語音合成 (Speech Synthesis)
 [Speech_Synthesis.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/speech_synthesis.html) <br>
 
-#### 語音辨識 (Automatic Speech Recognition)
+#### 語音辨識 (Speech Recognition)
 [Speech Recognition.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/speech_recognition.html) <br>
 
 #### TTS + ASR
 [tts_asr.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/tts_asr.html) <br>
 [華語練習工具](https://rkuo2025.github.io/app-mandarin) <br>
+
+---
+#### Edge-TTS
+安裝： `pip install edge-tts`<br>
+語音表列：`edge-tts --list-voices`<br>
+執行：`edge-tts --text "今天元氣滿滿!" --voice zh-TW-HsiaoChenNeural --write-media audio.mp3`<br>
 
