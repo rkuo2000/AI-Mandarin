@@ -104,3 +104,16 @@
 ```
 <a href="https://youtu.be/tCXbyHaDpD4"><img width="450" height="249" alt="image" src="https://github.com/user-attachments/assets/6562efb4-8fa9-496c-b396-a796fa463fc5" /></a>
 
+---
+### 5. 語音合成 & 語音辨識
+
+#### 語音合成 (Text-To-Speech)
+[Speech_Synthesis.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/speech_synthesis.html) <br>
+
+#### 語音辨識 (Automatic Speech Recognition)
+[Speech Recognition.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/speech_recognition.html) <br>
+
+#### TTS + ASR
+[tts_asr.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/tts_asr.html) <br>
+[華語練習工具](https://rkuo2025.github.io/app-mandarin) <br>
+
