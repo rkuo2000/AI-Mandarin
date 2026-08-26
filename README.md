@@ -146,3 +146,27 @@ edge-tts --text "請你用中文做自我介紹，講一下姓名, 國籍, 年�
 ```
 
 #### [華語教學_飲料店買波霸奶茶.html](https://rkuo2025.github.io/app-bubble_tea)
+
+---
+## 7. OpenCode
+
+### 安裝 NodeJS
+* 下載 [NodeJS](https://nodejs.org/en/download/current) 選 [v26.7.0 current] for [Windows], using [Chocolately]
+* 到下載檔案夾，點選安裝
+* 打開 Powershell (以管理員權限執行)
+```
+node -v
+Set-ExecutionPolicy RemoteSigned
+```
+[Y] 是(Y)  [A] 全部皆是(A)  [N] 否(N)  [L] 全部皆否(L)  [S] 暫停(S)  [?] 說明 (預設值為 "N"): A <br>
+```
+npm -v
+```
+
+---
+### 安裝 OpenCode
+```
+npm install -g @opencode-ai.latest
+
+opencode
+```
