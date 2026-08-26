@@ -166,7 +166,7 @@ npm -v
 ---
 ### 安裝 OpenCode
 ```
-npm install -g @opencode-ai.latest
+npm install -g opencode-ai@latest
 
 opencode
 ```
