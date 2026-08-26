@@ -116,9 +116,9 @@
 #### 語音辨識 (Speech Recognition)
 [Speech Recognition.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/speech_recognition.html) <br>
 
-#### TTS + ASR
-[tts_asr.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/tts_asr.html) <br>
-[華語練習工具](https://rkuo2025.github.io/app-mandarin) <br>
+#### 華語練習工具
+* [tts_asr.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/tts_asr.html) 
+* [tts_tts.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/tts_tts.html) 
 
 ---
 #### Edge-TTS
