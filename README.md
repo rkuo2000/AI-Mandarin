@@ -130,8 +130,8 @@ pip install edge-tts
 edge-tts --list-voices
 
 edge-tts --text "今天元氣滿滿!" --voice zh-TW-HsiaoChenNeural --write-media audio.mp3
-edge-tts --text "今天元氣滿滿!" --voice zh-TW-HsiaoYuNeural --write-media audio.mp3
-edge-tts --text "今天元氣滿滿!" --voice zh-TW-YunJheNeural --write-media audio.mp3
+edge-tts --text "天氣很熱, 我要吃冰淇淋" --voice zh-TW-HsiaoYuNeural --write-media audio.mp3
+edge-tts --text "請你用中文做自我介紹，講一下姓名, 國籍, 年級, 興趣" --voice zh-TW-YunJheNeural --write-media audio.mp3
 ```
 
 ---
