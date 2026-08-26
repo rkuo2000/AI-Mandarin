@@ -166,7 +166,15 @@ npm -v
 ---
 ### 安裝 OpenCode
 ```
+curl -fsSL https://opencode.ai/install | bash
+```
+或<br>
+```
 npm install -g opencode-ai@latest
+```
+
+```
+cd ~
 
 opencode
 ```
