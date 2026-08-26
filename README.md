@@ -1,5 +1,6 @@
-# 華語教師 AI 教學增能工作坊
-**[全球華文網](https://www.huayuworld.org/NewDetail/Index/1325)** <br>
+# [華語中心 AI 教學增能工作坊](https://github.com/rkuo2000/AI-Mandarin)
+
+**教學網頁參考 :** [全球華文網](https://www.huayuworld.org/NewDetail/Index/1325) <br>
 * [Gamma 簡報工具](https://www.huayuworld.org/NewDetail/Index/1200)
 * [【線上教學分享會】AI ✕華語老師：AI高效備課分享](https://youtu.be/XGPuEvxLNIA)
 * [【線上教學分享會】AI ✕華語老師：AI高效備課進階祕笈](https://youtu.be/VZiraHgteXs)
@@ -177,4 +178,27 @@ npm install -g opencode-ai@latest
 cd ~
 
 opencode
+```
+
+* `/models` (可選Free的免費模型：Big Pickle 或 Nemotron-3.5-Lightning) 
+* `/exit` (退出OpenCode) 
+* `Alt-Enter` (換行繼續輸入提示詞) 
+
+---
+### 修改ChatGPT或Gemini產生的html 範例
+
+#### 單人練習華語
+* 先將 [speech_sythesis.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/speech_synthesis.html) 及 [speech_recognition.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/speech_recognition.html) 下載到同一個檔案夾 （例如：C:\Users\user\mandarin)<br>
+* 打開 Powershell 視窗後，輸入以下指令<br>
+`cd ~/mandarin`<br>
+`opencode`<br>
+
+* 於OpenCode視窗中，輸入 `/models` 選擇免費模型
+* 於OpenCode視窗中，輸入提示詞可進行html的修改 （檔案夾裡必須存放 由ChatGPT或Gemini產生的html檔案及圖檔，再進行修改）
+```
+請寫一個網頁工具 tts_asr.html, 將speech_synthesis.html的功能置於左邊，將speech_recognition.html的功能置於右邊
+```
+
+```
+請寫一個網頁工具 tts_tts.html, 採用speech_synthesis.html的功能, 分左右兩邊各有一個Role-A 及 Role-B 
 ```
