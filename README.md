@@ -122,9 +122,15 @@
 
 ---
 #### Edge-TTS
-安裝： `pip install edge-tts`<br>
-語音表列：`edge-tts --list-voices`<br>
-執行：`edge-tts --text "今天元氣滿滿!" --voice zh-TW-HsiaoChenNeural --write-media audio.mp3`<br>
+`安裝 Python 3.14 for Windows (64-bit)`<br>
+`打開 Powershell` <br>
+```
+pip install edge-tts
+
+edge-tts --list-voices
+
+edge-tts --text "今天元氣滿滿!" --voice zh-TW-HsiaoChenNeural --write-media audio.mp3
+```
 
 ---
 ## 6. 互動式網頁
