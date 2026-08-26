@@ -117,8 +117,8 @@
 [Speech Recognition.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/speech_recognition.html) <br>
 
 #### 華語練習工具
-* [tts_asr.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/tts_asr.html) 
-* [tts_tts.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/tts_tts.html) 
+* **[單人華語練習](https://rkuo2025.github.io/app-tts_asr)** ([tts_asr.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/tts_asr.html))
+* **[雙人華語練習](https://rkuo2025.github.io/app-tts_tts)** ([tts_tts.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/tts_tts.html)) 
 
 ---
 #### Edge-TTS
