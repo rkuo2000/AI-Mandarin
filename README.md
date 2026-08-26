@@ -151,7 +151,14 @@ edge-tts --text "請你用中文做自我介紹，講一下姓名, 國籍, 年�
 ---
 ## 7. OpenCode
 
-### 安裝 NodeJS
+### Linux 安裝 NodeJS
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+\. "$HOME/.nvm/nvm.sh"
+nvm install 26
+```
+
+### Windows11 安裝 NodeJS
 * 下載 [NodeJS](https://nodejs.org/en/download/current) 選 [v26.7.0 current] for [Windows], using [Chocolately]
 * 到下載檔案夾，點選安裝
 * 打開 Powershell (以管理員權限執行)
@@ -185,11 +192,11 @@ opencode
 * `Alt-Enter` (換行繼續輸入提示詞) 
 
 ---
-### 修改ChatGPT或Gemini產生的html 範例
+### 修改網頁程式
 
 #### 單人練習華語
 * 先將 [speech_sythesis.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/speech_synthesis.html) 及 [speech_recognition.html](https://github.com/rkuo2000/AI-Mandarin/blob/main/speech_recognition.html) 下載到同一個檔案夾 （例如：C:\Users\user\mandarin)<br>
-* 打開 Powershell 視窗後，輸入以下指令<br>
+* 打開視窗（Terminal 或 Powershell）後，輸入以下指令<br>
 `cd ~/mandarin`<br>
 `opencode`<br>
 
@@ -198,7 +205,7 @@ opencode
 ```
 請寫一個網頁工具 tts_asr.html, 將speech_synthesis.html的功能置於左邊，將speech_recognition.html的功能置於右邊
 ```
-
+或<br>
 ```
 請寫一個網頁工具 tts_tts.html, 採用speech_synthesis.html的功能, 分左右兩邊各有一個Role-A 及 Role-B 
 ```
